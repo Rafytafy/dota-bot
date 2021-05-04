@@ -1,4 +1,4 @@
-const helper = require('./functions');
+const stats = require('./stats');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 require('dotenv').config({path: __dirname + '/.env'})
@@ -8,13 +8,9 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-
-  switch(msg.content){
-    case 'ping':
-        helper.handlePingMessageEvent(msg);
-        break;
+  switch(msg.content.split(" ")[0]){
     case 'stats':
-        helper.handleRecentGameLossesMessageEvent(msg);
+        stats.handleRecentGameLossesMessageEvent(msg);
         break;
   }
 });
