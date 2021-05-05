@@ -2,6 +2,7 @@ const axios = require('axios');
 
 exports.handleRecentGameLossesMessageEvent = (msg) => {
     let commands = msg.content.split(" ");
+
     axios.get(`https://api.opendota.com/api/players/${commands[1]}/recentMatches`)
         .then((res) => {
             if(res.data.length === 0){ //Check if empty array
@@ -9,11 +10,13 @@ exports.handleRecentGameLossesMessageEvent = (msg) => {
             }
             else{
                 let killDeathObject = countTotalKillsAndDeathsInRecentGames(res.data)
-                msg.reply(`\nKillssss: ${killDeathObject.kills} Deaths: ${killDeathObject.deaths}`)
+                console.log(msg.author.id)
+                msg.reply(`\nKills: ${killDeathObject.kills} Deaths: ${killDeathObject.deaths}`)
             }
         })
         .catch((err) => {
-            msg.reply(err)
+            console.log(err)
+            msg.reply("Invalid steam ID")
         })
 }
 
