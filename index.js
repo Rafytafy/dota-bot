@@ -1,4 +1,4 @@
-const stats = require('./stats');
+const Stats = require('./stats');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const mongoose = require('mongoose');
@@ -15,11 +15,11 @@ client.on('ready', () => {
 
 client.on('message', msg => {
   switch(msg.content.split(" ")[0]){
-    case 'stats':
-      stats.handleRecentGameLossesMessageEvent(msg);
+    case '/stats':
+      new Stats(msg);
       break;
-    case 'register':
-      break
+    case '/register':
+      break;
   }
 });
 
