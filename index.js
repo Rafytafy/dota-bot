@@ -15,12 +15,12 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-  
+  // console.log(msg.author)
   switch(msg.content.split(" ")[0]){
-    case '/stats':
+    case '$stats':
       new Stats(msg);
       break;
-    case '/register':
+    case '$register':
       new Register(msg)
       break;
   }
