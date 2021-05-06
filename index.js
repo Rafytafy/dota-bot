@@ -14,6 +14,7 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
+  console.log(msg)
   switch(msg.content.split(" ")[0]){
     case '/stats':
       new Stats(msg);

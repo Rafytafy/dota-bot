@@ -21,7 +21,7 @@ class Stats {
                 }
             })
             .catch((err) => {
-                console.log(err)
+                // console.log(err)
                 this.msg.reply("Invalid steam ID")
             })
     }
