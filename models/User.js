@@ -10,11 +10,15 @@ const UserSchema = new Schema({
         type: Number,
         required: true
     },
-    user_name:{
+    username:{
         type: String,
         required: true
     },
-    discrimiator: {
+    discriminator: {
+        type: Number,
+        required: true
+    },
+    steam_id: {
         type: Number,
         required: true
     }

@@ -1,10 +1,11 @@
-const Stats = require('./stats');
+const Stats = require('./actions/Stats');
+const Register = require('./actions/Register');
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const mongoose = require('mongoose');
 require('dotenv').config({path: __dirname + '/.env'})
 
-mongoose.connect('mongodb://mongo:27017', {useNewUrlParser: true, useUnifiedTopology: true})
+mongoose.connect('mongodb://root:example@mongo:27017', {useNewUrlParser: true, useUnifiedTopology: true})
   .then(() => console.log("mongoDB Connected..."))
   .catch(err => console.log("error"))
 
@@ -14,12 +15,13 @@ client.on('ready', () => {
 });
 
 client.on('message', msg => {
-  console.log(msg)
+  
   switch(msg.content.split(" ")[0]){
     case '/stats':
       new Stats(msg);
       break;
     case '/register':
+      new Register(msg)
       break;
   }
 });
