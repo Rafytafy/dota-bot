@@ -25,34 +25,6 @@ client.on('message', msg => {
       new Register(msg)
       break;
     case '!test':
-      const embed = new MessageEmbed()
-      // Set the title of the field
-      .setTitle('A slick little embed')
-      // Set the color of the embed
-      .setColor(0xff0000)
-      .setAuthor('rafael', msg.author.displayAvatarURL(), 'http://google.com')
-      .setImage(msg.author.displayAvatarURL())
-      .setThumbnail(msg.author.displayAvatarURL())
-      // Set the main content of the embed
-      .setDescription('Hello, this is a slick embed!')
-      .addFields({
-          name: 'Field 1',
-          value: 'Hello world',
-          inline: false
-        },
-        {
-          name: 'Field 2',
-          value: 'Hello world',
-          inline:true
-        },
-        {
-          name: 'Field 2',
-          value: 'Hello world',
-          inline:true
-        }
-      )
-    // Send the embed to the same channel as the message
-    msg.channel.send(embed);
       break;
   }
 });
