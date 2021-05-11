@@ -1,8 +1,10 @@
-const Stats = require('./actions/Stats');
-const Register = require('./actions/Register');
+const Stats = require('./objects/Stats');
+const Register = require('./objects/Register');
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const { MessageEmbed } = require('discord.js');
+const getStats = require('./actions/getStats')
+const getUser = require('./actions/getUser')
+const {recent20MatchesMessage} = require('./actions/buildAndSendEmbedMessage')
 const mongoose = require('mongoose');
 require('dotenv').config({path: __dirname + '/.env'})
 
@@ -19,7 +21,7 @@ client.on('message', msg => {
   // console.log(msg.author)
   switch(msg.content.split(" ")[0]){
     case '!stats':
-      new Stats(msg);
+      handleStats(msg);
       break;
     case '!register':
       new Register(msg)
@@ -28,5 +30,18 @@ client.on('message', msg => {
       break;
   }
 });
+
+async function handleStats(msg){
+  let user = await getUser(msg.author.id)
+    if(user === null){
+      msg.reply('You need to be registered first');
+    }
+    else{
+      let matchData = await getStats(user.steam_id);
+      let stats = new Stats(matchData);
+      let embedMessage = recent20MatchesMessage(msg, stats);
+      msg.channel.send(embedMessage);
+    }
+}
 
 client.login(process.env.TOKEN);
