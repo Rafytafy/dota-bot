@@ -16,7 +16,10 @@ class Stats {
 
     countTotalNumberOfWinsAndLosesInRecentGames(){
         for(let i = 0; i < this.matchData.length; i++){
-            if(this.matchData[i].player_slot <= 127){
+            if(this.matchData[i].player_slot <= 127 &&  this.matchData[i].radiant_win){
+                this.totalWins += 1;
+            }
+            else if(this.matchData[i].player_slot > 127 &&  !this.matchData[i].radiant_win){
                 this.totalWins += 1;
             }
             else{

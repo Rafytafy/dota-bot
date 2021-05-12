@@ -3,7 +3,7 @@ const Discord  = require('discord.js'),
 
 const registerUser = require('./actions/registerUser')
 
-const { handleStats } = require('./handler/')
+const { handleStats, handleLeaderboard } = require('./handler/')
 
 require('./db');
 require('dotenv').config({path: __dirname + '/.env'});
@@ -20,8 +20,11 @@ client.on('message', msg => {
     case '!register':
       registerUser(msg)
       break;
-    case '!test':
+    case '!leaderboard':
+      handleLeaderboard(msg)
       break;
+    case '!google':
+      msg.reply("Please dont make me")
   }
 });
 
