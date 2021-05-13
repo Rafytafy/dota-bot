@@ -2,9 +2,9 @@ const axios = require('axios'),
       User  = require('../models/User');
 
 async function registerUser(msg){
-    let isValidId = await isValidSteamId();
-    let isAlreadyRegistered = await isAlreadyRegisterdUser(msg.author.id);
     let steam_id = msg.content.split(" ")[1];
+    let isValidId = await isValidSteamId(steam_id);
+    let isAlreadyRegistered = await isAlreadyRegisterdUser(msg.author.id);
 
     if(isValidId && !isAlreadyRegistered){
         const newUser = new User({
