@@ -5,6 +5,7 @@ services:
 
   dota-bot:
     image: dota-bot-image
+    restart: always
     build: .
     ports:
       - "80:8888"
@@ -13,6 +14,7 @@ services:
  
   mongo:
     image: mongo
+    restart: always
     volumes:
         - './data:/data/db'
     ports:

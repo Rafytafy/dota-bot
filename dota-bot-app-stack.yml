@@ -1,0 +1,25 @@
+version: "3.9"
+services:
+
+  dota-bot:
+    image: dota-bot-image
+    build: .
+    ports:
+      - "80:8888"
+    volumes:
+      - .:/app/
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+  db:
+    image: mongo
+    volumes:
+      - './data:/data/db'
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
+  
+
