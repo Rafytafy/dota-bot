@@ -1,7 +1,7 @@
 const   Stats    = require('../objects/Stats'),
         getUser  = require('../actions/getUser'),
         getUsers = require('../actions/getUsers'),
-        getStats = require('../actions/getStats');
+        getRecent20Matches = require('../actions/getRecent20Matches');
         
 const {recent20MatchesMessage} = require('../actions/embedMessageBuilder');
 
@@ -14,7 +14,7 @@ exports.handleStats = async function(msg){
       msg.reply('You need to be registered first');
     }
     else{
-      let matchData = await getStats(user.steam_id);
+      let matchData = await getRecent20Matches(user.steam_id);
       let stats = new Stats(matchData);
       let embedMessage = recent20MatchesMessage(msg, stats);
       msg.channel.send(embedMessage);
@@ -26,7 +26,7 @@ exports.handleLeaderboard = async function(msg){
   let usersWithStats = [];
 
   for(let i = 0; i < users.length; i++){
-    let matchData = await getStats(users[i].steam_id);
+    let matchData = await getRecent20Matches(users[i].steam_id);
     let stats = new Stats(matchData);
     usersWithStats.push({
       user: users[i],

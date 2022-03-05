@@ -3,7 +3,7 @@ const Discord  = require('discord.js'),
 
 const registerUser = require('./actions/registerUser')
 
-const { handleStats, handleLeaderboard } = require('./handler/')
+const { handleStats, handleLeaderboard } = require('./controllers/')
 
 require('./db');
 require('dotenv').config({path: __dirname + '/.env'});
